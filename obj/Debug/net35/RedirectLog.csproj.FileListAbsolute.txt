@@ -1,6 +1,0 @@
-D:\Neos_Res Stuff\Mods\Res\BepInEx\RedirectLog\obj\Debug\net35\RedirectLog.csproj.AssemblyReference.cache
-D:\Neos_Res Stuff\Mods\Res\BepInEx\RedirectLog\obj\Debug\net35\PluginInfo.cs
-D:\Neos_Res Stuff\Mods\Res\BepInEx\RedirectLog\obj\Debug\net35\RedirectLog.GeneratedMSBuildEditorConfig.editorconfig
-D:\Neos_Res Stuff\Mods\Res\BepInEx\RedirectLog\obj\Debug\net35\RedirectLog.AssemblyInfoInputs.cache
-D:\Neos_Res Stuff\Mods\Res\BepInEx\RedirectLog\obj\Debug\net35\RedirectLog.AssemblyInfo.cs
-D:\Neos_Res Stuff\Mods\Res\BepInEx\RedirectLog\obj\Debug\net35\RedirectLog.csproj.CoreCompileInputs.cache
