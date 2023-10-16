@@ -22,7 +22,7 @@ namespace RedirectLog
         {
             string cleanedMessage = RemoveTimestampAndFPS(message);
 
-            if (IsValidLog(cleanedMessage) && cleanedMessage.Contains("ResoniteModLoader"))
+            if (IsValidLog(cleanedMessage) && cleanedMessage.Contains("ResoniteModLoader") || cleanedMessage.Contains("LastModifyingUser") || message.Contains("Failed Load: Could not gather") || message.Contains("SignalR") || message.Contains("SIGNALR"))
             {
                 FormatModLoaderLog(cleanedMessage);
             }
@@ -38,7 +38,7 @@ namespace RedirectLog
 
             if (IsValidLog(cleanedMessage) && cleanedMessage.Contains("ResoniteModLoader"))
             {
-                FormatModLoaderLog("[UniLog] [Warning] " + cleanedMessage);
+                FormatModLoaderLog(cleanedMessage);
             }
             else if (IsValidLog(cleanedMessage))
             {
@@ -52,7 +52,7 @@ namespace RedirectLog
 
             if (IsValidLog(cleanedMessage) && cleanedMessage.Contains("ResoniteModLoader"))
             {
-                FormatModLoaderLog("[UniLog] [Error] " + cleanedMessage);
+                FormatModLoaderLog(cleanedMessage);
             }
             else if (IsValidLog(cleanedMessage))
             {
@@ -79,6 +79,18 @@ namespace RedirectLog
             {
                 console.WriteLine("[UniLog] " + message, ConsoleColor.Yellow);
             }
+            else if (message.Contains("LastModifyingUser"))
+            {
+                console.WriteLine("[UniLog] [Warning] " + message, ConsoleColor.Yellow);
+            }
+            else if (message.Contains("Failed Load: Could not gather"))
+            {
+                console.WriteLine("[UniLog] [Error] " + message, ConsoleColor.Red);
+            }
+            else if (message.Contains("SignalR") || message.Contains("SIGNALR"))
+            {
+                console.WriteLine("[UniLog] " + message, ConsoleColor.DarkMagenta);
+            }
             else
             {
                 console.WriteLine("[UniLog] " + message, ConsoleColor.Gray);
@@ -101,7 +113,8 @@ namespace RedirectLog
         {
             return !string.IsNullOrWhiteSpace(message) &&
                    !message.Contains("Session updated, forcing status update") &&
-                   !message.Contains("[DEBUG][ResoniteModLoader] Intercepting call to AppDomain.GetAssemblies()");
+                   !message.Contains("[DEBUG][ResoniteModLoader] Intercepting call to AppDomain.GetAssemblies()") &&
+                   !message.Contains("Rebuild:");
         }
     }
 }
