@@ -1,18 +1,30 @@
 ﻿using BepInEx;
+using BepInEx.Configuration;
 using UnityEngine;
 using System;
 using System.Text.RegularExpressions;
 using BCE;
 using Elements.Core;
+using static OfficialAssets.Graphics;
+using static UnityEngine.UIElements.StyleVariableResolver;
 
 namespace RedirectLog
 {
-    [BepInPlugin("org.nep.RedirectLog", "RedirectLog", "1.0.0")]
+    [BepInPlugin("org.Nep.RedirectLog", "RedirectLog", "1.0.1")]
     public class RedirectLog : BaseUnityPlugin
     {
-
+        private ConfigEntry<bool> configEnableTimestamp;
+        private ConfigEntry<bool> configEnableFPS;
         void Awake()
         {
+            configEnableTimestamp = Config.Bind("General",
+                                    "Enable TimeStamps",
+                                    true,
+                                    "Whether or not to show TimeStamps in the Log");
+            configEnableFPS = Config.Bind("General",
+                        "Enable FPS Log",
+                        false,
+                        "Whether or not to show the FPS in the Log");
             UniLog.OnLog += OnLogMessage;
             UniLog.OnWarning += OnWarningMessage;
             UniLog.OnError += OnErrorMessage;
@@ -99,14 +111,31 @@ namespace RedirectLog
 
         string RemoveTimestampAndFPS(string message)
         {
-            string pattern1 = @"\d{1,2}:\d{1,2}:\d{1,2} [APap][Mm]\.\d{1,3} \(\s*-*\d+\s?FPS\s?\)\s+";
+            string pattern1 = @"\d{1,2}:\d{1,2}:\d{1,2} [APap][Mm]\.\d{1,3}\s";
+            string pattern2 = @"\(\s*-*\d+\s?FPS\s?\)\s+";
 
-            string pattern2 = @"\d{1,2}:\d{1,2}:\d{1,2} [APap][Mm]\.\d{1,3} \(\s*-*\d+\s?FPS\s?\)\s+";
+            if (!configEnableTimestamp.Value)
+            {
+                string result = Regex.Replace(message, pattern1, "");
 
-            string result = Regex.Replace(message, pattern1, "");
-            result = Regex.Replace(result, pattern2, "");
+                if (!configEnableFPS.Value)
+                {
+                    string result2 = Regex.Replace(result, pattern2, "");
 
-            return result;
+                    return result2;
+                }
+                else return result;
+            }
+            else
+            {
+                if (!configEnableFPS.Value)
+                {
+                    string result2 = Regex.Replace(message, pattern2, "");
+
+                    return result2;
+                }
+                else return message;
+            }
         }
 
         bool IsValidLog(string message)

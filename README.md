@@ -5,10 +5,28 @@
 ### Installation
  Download and extract [BepInEx 5.4.22 x64](https://github.com/BepInEx/BepInEx/releases) into the main game folder and run the game once to generate the folders and config files
 
- You will also need to download [BCE](https://github.com/innominata/BepInEx-Console-Extensions/releases/tag/1.0) (BepInEx Console Extensions) and place this into the "GameDir"/BepInEx/Plugins
+ You will also need to download [BCE](https://github.com/innominata/BepInEx-Console-Extensions/releases/tag/1.0) (BepInEx Console Extensions) and place this into the "GameDir"/BepInEx/plugins
 
- Finally download the RedirectLog.dll from the [Releases](https://github.com/nepushiro/RedirectLog/releases) and place this into the "GameDir"/BepInEx/Plugins
+ Finally download the RedirectLog.dll from the [Releases](https://github.com/nepushiro/RedirectLog/releases) and place this into the "GameDir"/BepInEx/plugins
 
-To get the Console to appear it is disabled by default in the BepInEx config ("GameDir"/BepInEx/Config)
+To get the Console to appear it is disabled by default in the BepInEx config ("GameDir"/BepInEx/config)
 
-Now your Console should be displaying the logs! 
+Now your Console should be displaying the logs!
+
+#### For Enabling TimeStamps and/or FPS
+
+This will be in the Config in "GameDir"/BepInEx/config/org.Nep.RedirectLog.cfg
+
+```
+[General]
+
+## Whether or not to show TimeStamps in the Log
+# Setting type: Boolean
+# Default value: true
+Enable TimeStamps = true
+
+## Whether or not to show the FPS in the Log
+# Setting type: Boolean
+# Default value: false
+Enable FPS Log = false
+```
