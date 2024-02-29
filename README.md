@@ -7,7 +7,9 @@
 ### Installation
  Download and extract [BepInEx 5.4.22 x64](https://github.com/BepInEx/BepInEx/releases) into the main game folder and run the game once to generate the folders and config files
 
- You will also need to download [BCE](https://github.com/NepuShiro/BepInEx-Console-Extensions/releases/tag/1.1.0.0) (BepInEx Console Extensions) and place this into the "GameDir"/BepInEx/plugins
+> BCE Is no longer needed on versions >1.0.2
+
+ ~~You will also need to download [BCE](https://github.com/NepuShiro/BepInEx-Console-Extensions/releases/tag/1.1.0.0) (BepInEx Console Extensions) and place this into the "GameDir"/BepInEx/plugins~~
 
  Finally download the RedirectLog.dll from the [Releases](https://github.com/nepushiro/RedirectLog/releases) and place this into the "GameDir"/BepInEx/plugins
 
