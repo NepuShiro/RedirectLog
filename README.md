@@ -9,11 +9,21 @@
 
 > BCE Is no longer needed on versions >1.0.2
 
- ~~You will also need to download [BCE](https://github.com/NepuShiro/BepInEx-Console-Extensions/releases/tag/1.1.0.0) (BepInEx Console Extensions) and place this into the "GameDir"/BepInEx/plugins~~
+ ~~You will also need to download [BCE](https://github.com/NepuShiro/BepInEx-Console-Extensions/releases/tag/1.1.0.0) (BepInEx Console Extensions) and place this into the /Resonite/BepInEx/plugins~~
 
- Finally download the RedirectLog.dll from the [Releases](https://github.com/nepushiro/RedirectLog/releases) and place this into the "GameDir"/BepInEx/plugins
+ Finally download the RedirectLog.dll from the [Releases](https://github.com/nepushiro/RedirectLog/releases) and place this into the /Resonite/BepInEx/plugins
 
-To get the Console to appear it is disabled by default in the BepInEx config ("GameDir"/BepInEx/config)
+To get the Console to appear it is disabled by default in the BepInEx config (/Resonite/BepInEx/plugins)
+```
+Example - C:\Program Files (x86)\Steam\steamapps\common\Resonite\BepInEx\config\BepInEx.cfg
+
+[Logging.Console]
+
+## Enables showing a console for log output.
+# Setting type: Boolean
+# Default value: false
+Enabled = true         <-- Change this to True
+```
 
 Now your Console should be displaying the logs!
 
