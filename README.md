@@ -5,17 +5,17 @@
 ### Note you might have issues with some select mods when installing BepInEx.
 
 ### Installation
+ #### Example GameDir - `C:\Program Files (x86)\Steam\steamapps\common\Resonite\BepInEx\config\BepInEx.cfg`
+
  Download and extract [BepInEx 5.4.22 x64](https://github.com/BepInEx/BepInEx/releases) into the main game folder and run the game once to generate the folders and config files
 
 > BCE Is no longer needed on versions >1.0.2
 
- ~~You will also need to download [BCE](https://github.com/NepuShiro/BepInEx-Console-Extensions/releases/tag/1.1.0.0) (BepInEx Console Extensions) and place this into `/Resonite/BepInEx/plugins`~~
+ ~~You will also need to download [BCE](https://github.com/NepuShiro/BepInEx-Console-Extensions/releases/tag/1.1.0.0) (BepInEx Console Extensions) and place this into `%GameDir%/BepInEx/plugins`~~
 
- Finally download the `RedirectLog.dll` from the [Releases](https://github.com/nepushiro/RedirectLog/releases) and place this into `/Resonite/BepInEx/plugins`
+ Finally download the `RedirectLog.dll` from the [Releases](https://github.com/nepushiro/RedirectLog/releases) and place this into `%GameDir%/BepInEx/plugins`
 
-To get the Console to appear it is disabled by default in the BepInEx config `/Resonite/BepInEx/plugins`
-
-Example GameDir - `C:\Program Files (x86)\Steam\steamapps\common\Resonite\BepInEx\config\BepInEx.cfg`
+To get the Console to appear it is disabled by default in the BepInEx config `%GameDir%/BepInEx/config/BepInEx.cfg`
 ```
 [Logging.Console]
 
@@ -29,7 +29,7 @@ Now your Console should be displaying the logs!
 
 #### For Enabling TimeStamps and/or FPS
 
-This will be in the Config `/Resonite/BepInEx/config/org.Nep.RedirectLog.cfg`
+This will be in the Config `%GameDir%/BepInEx/config/org.Nep.RedirectLog.cfg`
 
 ```
 [General]
