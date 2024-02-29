@@ -11,10 +11,16 @@ namespace RedirectLog
 	[BepInPlugin("org.Nep.RedirectLog", "RedirectLog", "1.0.2")]
 	public class RedirectLog : BaseUnityPlugin
 	{
-		public static readonly string logFilePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "ResoniteLogs", "ResoniteLog-" + DateTime.Now.ToString("yyyyMMdd-HHmmss") + ".log"); private ConfigEntry<bool> configEnableTimestamp;
+		public static readonly string logFilePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "ResoniteLogs", "ResoniteLog-" + DateTime.Now.ToString("yyyyMMdd-HHmmss") + ".log"); 
+		private ConfigEntry<bool> configEnableTimestamp;
 		private ConfigEntry<bool> configEnableFPS;
+		private static ConfigEntry<bool> configEnableFileLogging;
 		private void Awake()
 		{
+			configEnableFileLogging = Config.Bind("General",
+									"Enable File Logging",
+									true,
+									"Whether or not to Log to a File");
 			configEnableTimestamp = Config.Bind("General",
 									"Enable TimeStamps",
 									true,
@@ -141,6 +147,7 @@ namespace RedirectLog
 			
 			public static void LogToFile(string message)
 			{
+				
 				string logDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "ResoniteLogs");
 
 				if (!Directory.Exists(logDirectory))
@@ -148,7 +155,9 @@ namespace RedirectLog
 					Directory.CreateDirectory(logDirectory);
 				}
 
-				File.AppendAllText(RedirectLog.logFilePath, message + Environment.NewLine);
+				if (!configEnableFileLogging.Value) return;
+				
+				File.AppendAllText(logFilePath, message + Environment.NewLine);
 			}
 		}
 	}
