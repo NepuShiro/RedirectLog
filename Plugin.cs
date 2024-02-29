@@ -30,62 +30,54 @@ namespace RedirectLog
 
 		private void OnLogMessage(string message)
 		{
-			if (!string.IsNullOrWhiteSpace(message)) return;
-			
 			string cleanedMessage = RemoveTimestampAndFPS(message);
 
 			if (IsValidLog(cleanedMessage) && MatchesLogPatterns(cleanedMessage))
 			{
-				console.LogToFile("[UniLog] " + message);
+				Console.LogToFile("[UniLog] " + message);
 				FormatModLoaderLog(cleanedMessage);
 			}
 			else if (IsValidLog(cleanedMessage))
 			{
-				console.LogToFile("[UniLog] " + message);
-				console.WriteLine("[UniLog] " + cleanedMessage, ConsoleColor.Gray);
+				Console.LogToFile("[UniLog] " + message);
+				Console.WriteLine("[UniLog] " + cleanedMessage, ConsoleColor.Gray);
 			}
 		}
 
 		private void OnWarningMessage(string message)
 		{
-			if (!string.IsNullOrWhiteSpace(message)) return;
-			
 			string cleanedMessage = RemoveTimestampAndFPS(message);
 
 			if (IsValidLog(cleanedMessage) && MatchesLogPatterns(cleanedMessage))
 			{
-				console.LogToFile("[UniLog] [Warning] " + message);
+				Console.LogToFile("[UniLog] [Warning] " + message);
 				FormatModLoaderLog(cleanedMessage);
 			}
 			else if (IsValidLog(cleanedMessage))
 			{
-				console.LogToFile("[UniLog] [Warning] " + message);
-				console.WriteLine("[UniLog] [Warning] " + cleanedMessage, ConsoleColor.Yellow);
+				Console.LogToFile("[UniLog] [Warning] " + message);
+				Console.WriteLine("[UniLog] [Warning] " + cleanedMessage, ConsoleColor.Yellow);
 			}
 		}
 
 		private void OnErrorMessage(string message)
 		{
-			if (!string.IsNullOrWhiteSpace(message)) return;
-			
 			string cleanedMessage = RemoveTimestampAndFPS(message);
 
 			if (IsValidLog(cleanedMessage) && MatchesLogPatterns(cleanedMessage))
 			{
-				console.LogToFile("[UniLog] [Error] " + message);
+				Console.LogToFile("[UniLog] [Error] " + message);
 				FormatModLoaderLog(cleanedMessage);
 			}
 			else if (IsValidLog(cleanedMessage))
 			{
-				console.LogToFile("[UniLog] [Error] " + message);
-				console.WriteLine("[UniLog] [Error] " + cleanedMessage, ConsoleColor.Red);
+				Console.LogToFile("[UniLog] [Error] " + message);
+				Console.WriteLine("[UniLog] [Error] " + cleanedMessage, ConsoleColor.Red);
 			}
 		}
 
 		private void FormatModLoaderLog(string message)
 		{
-			if (!string.IsNullOrWhiteSpace(message)) return;
-
 			var lower = message.ToLower();
 			var consoleColor = Regex.IsMatch(lower, @"\[info\]") ? ConsoleColor.Green :
 							   Regex.IsMatch(lower, @"\[debug\]") ? ConsoleColor.Blue :
@@ -97,13 +89,11 @@ namespace RedirectLog
 							   Regex.IsMatch(lower, @"sendstatustouser:") ? ConsoleColor.Magenta :
 							   ConsoleColor.Gray;
 
-			console.WriteLine($"[UniLog] {message}", consoleColor);
+			Console.WriteLine($"[UniLog] {message}", consoleColor);
 		}
 
 		private bool MatchesLogPatterns(string message)
 		{
-			if (!string.IsNullOrWhiteSpace(message)) return false;
-			
 			var lower = message.ToLower();
 			return Regex.IsMatch(lower, @"\[info\]") ||
 				   Regex.IsMatch(lower, @"\[debug\]") ||
@@ -117,8 +107,6 @@ namespace RedirectLog
 
 		private bool IsValidLog(string message)
 		{
-			if (!string.IsNullOrWhiteSpace(message)) return false;
-
 			string lower = message.ToLower();
 			return !Regex.IsMatch(lower, "session updated, forcing status update") &&
 				   !Regex.IsMatch(lower, @"\[debug\]\[resonitemodloader\] intercepting call to appdomain\.getassemblies\(\)") &&
@@ -127,8 +115,6 @@ namespace RedirectLog
 
 		private string RemoveTimestampAndFPS(string message)
 		{
-			if (!string.IsNullOrWhiteSpace(message)) return null;
-
 			string timestampPattern = @"\d{1,2}:\d{1,2}:\d{1,2} [APap][Mm]\.\d{1,3}\s";
 			string fpsPattern = @"\(\s*-*\d+\s?FPS\s?\)\s+";
 
@@ -144,34 +130,26 @@ namespace RedirectLog
 
 			return message;
 		}
-	}
-	
-	public class console 
-	{
-		public static void WriteLine(string text, ConsoleColor consoleColor)
+
+		public class Console
 		{
-			ConsoleManager.SetConsoleColor(consoleColor);
-			ConsoleManager.StandardOutStream.WriteLine(text);
-		}
-
-		public static void Write(string text, ConsoleColor consoleColor)
-		{
-			ConsoleManager.SetConsoleColor(consoleColor);
-			ConsoleManager.StandardOutStream.Write(text);
-		}
-
-		public static void LogToFile(string message)
-		{
-			if (!string.IsNullOrWhiteSpace(message)) return;
-
-			string logDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "ResoniteLogs");
-
-			if (!Directory.Exists(logDirectory))
+			public static void WriteLine(string text, ConsoleColor consoleColor)
 			{
-				Directory.CreateDirectory(logDirectory);
+				ConsoleManager.SetConsoleColor(consoleColor);
+				ConsoleManager.StandardOutStream.WriteLine(text);
 			}
+			
+			public static void LogToFile(string message)
+			{
+				string logDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "ResoniteLogs");
 
-			File.AppendAllText(RedirectLog.logFilePath, message + Environment.NewLine);
+				if (!Directory.Exists(logDirectory))
+				{
+					Directory.CreateDirectory(logDirectory);
+				}
+
+				File.AppendAllText(RedirectLog.logFilePath, message + Environment.NewLine);
+			}
 		}
 	}
 }
